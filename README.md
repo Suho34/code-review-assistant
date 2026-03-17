@@ -108,7 +108,7 @@ graph TD
 
 ## 🔑 Environment Variable Guide
 
-Create a `.env` file in the root directory. Below are the required variables:
+A template for the environment variables can be found in [env-example/.env.example](env-example/.env.example). Create a `.env` file in the root directory using this template.
 
 | Variable | Description | Example / Link |
 | :--- | :--- | :--- |
