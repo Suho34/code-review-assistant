@@ -157,7 +157,9 @@ export const SchemaDisplayMethod = ({
   );
 };
 
-export type SchemaDisplayPathProps = HTMLAttributes<HTMLSpanElement>;
+export type SchemaDisplayPathProps = Omit<HTMLAttributes<HTMLSpanElement>, "children"> & {
+  children?: string;
+};
 
 export const SchemaDisplayPath = ({
   className,

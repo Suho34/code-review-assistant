@@ -386,6 +386,7 @@ export type PromptInputProps = Omit<
     message: PromptInputMessage,
     event: FormEvent<HTMLFormElement>
   ) => void | Promise<void>;
+  inputGroupClassName?: string;
 };
 
 export const PromptInput = ({
@@ -398,6 +399,7 @@ export const PromptInput = ({
   maxFileSize,
   onError,
   onSubmit,
+  inputGroupClassName,
   children,
   ...props
 }: PromptInputProps) => {
@@ -799,7 +801,9 @@ export const PromptInput = ({
         ref={formRef}
         {...props}
       >
-        <InputGroup className="overflow-hidden">{children}</InputGroup>
+        <InputGroup className={cn("overflow-hidden", inputGroupClassName)}>
+          {children}
+        </InputGroup>
       </form>
     </>
   );
@@ -933,7 +937,7 @@ export const PromptInputTextarea = ({
 
   return (
     <InputGroupTextarea
-      className={cn("field-sizing-content max-h-48 min-h-16", className)}
+      className={cn("field-sizing-content min-h-16", className)}
       name="message"
       onCompositionEnd={handleCompositionEnd}
       onCompositionStart={handleCompositionStart}

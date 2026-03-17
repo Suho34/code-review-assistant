@@ -5,11 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { FeedbackPanel } from "@/components/interview/FeedbackPanel";
 import { INTERVIEW_TYPE_LABELS } from "@/lib/constants";
-import { 
-  ArrowLeft, 
-  BrainCircuit,
-  Plus
-} from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import { Loader2 as Spinner } from "lucide-react";
@@ -42,7 +38,9 @@ export default async function SessionSummaryPage({
     notFound();
   }
 
-  const label = (INTERVIEW_TYPE_LABELS as any)[interviewSession.type] || interviewSession.type;
+  const label =
+    (INTERVIEW_TYPE_LABELS as any)[interviewSession.type] ||
+    interviewSession.type;
 
   return (
     <div className="flex min-h-screen flex-col bg-background font-sans">
@@ -52,8 +50,8 @@ export default async function SessionSummaryPage({
         <div className="mx-auto max-w-[1100px] space-y-16">
           {/* Header */}
           <div>
-             <Link 
-              href="/dashboard" 
+            <Link
+              href="/dashboard"
               className="group mb-4 inline-flex items-center font-mono text-[10px] text-muted-foreground transition-colors hover:text-foreground"
             >
               <ArrowLeft className="mr-1 h-3 w-3 transition-transform group-hover:-translate-x-0.5" />
@@ -65,7 +63,9 @@ export default async function SessionSummaryPage({
                   {label} Results
                 </h1>
                 <p className="mt-1 text-muted-foreground font-medium">
-                  SESSION ID: <span className="font-mono text-[10px] uppercase tracking-wider">{id.slice(0, 8)}</span> • {interviewSession.completedAt?.toLocaleDateString() || interviewSession.createdAt.toLocaleDateString()}
+                  •{" "}
+                  {interviewSession.completedAt?.toLocaleDateString() ||
+                    interviewSession.createdAt.toLocaleDateString()}
                 </p>
               </div>
               <Button asChild className="h-10 px-6 font-medium">
@@ -87,20 +87,25 @@ export default async function SessionSummaryPage({
             ) : (
               <div className="border border-border bg-surface rounded-xl p-16 text-center">
                 <Spinner className="h-6 w-6 mx-auto text-muted-foreground mb-4" />
-                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">GENERATING REPORT...</p>
+                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
+                  GENERATING REPORT...
+                </p>
               </div>
             )}
           </section>
 
           {/* Transcript Section */}
           <section className="space-y-6">
-             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="font-mono text-[10px] font-bold tracking-[0.2em] uppercase text-muted-foreground">
-                  INTERVIEW TRANSCRIPT
-                </div>
-                <CopyTranscriptButton 
-                  messages={interviewSession.messages.map(m => ({ role: m.role, content: m.content }))} 
-                />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="font-mono text-[10px] font-bold tracking-[0.2em] uppercase text-muted-foreground">
+                INTERVIEW TRANSCRIPT
+              </div>
+              <CopyTranscriptButton
+                messages={interviewSession.messages.map((m) => ({
+                  role: m.role,
+                  content: m.content,
+                }))}
+              />
             </div>
             <div className="border border-border bg-surface rounded-xl overflow-hidden divide-y divide-subtle">
               {interviewSession.messages.map((message, idx) => {
@@ -113,7 +118,9 @@ export default async function SessionSummaryPage({
                       {isAssistant ? "AI" : "YOU"}
                     </div>
                     <div className="flex-1">
-                      <div className={`text-base leading-[1.6] ${isAssistant ? "text-foreground" : "text-muted-foreground"} font-medium max-w-[800px]`}>
+                      <div
+                        className={`text-base leading-[1.6] ${isAssistant ? "text-foreground" : "text-muted-foreground"} font-medium max-w-[800px]`}
+                      >
                         {message.content}
                       </div>
                     </div>
@@ -125,10 +132,12 @@ export default async function SessionSummaryPage({
 
           {/* Bottom CTA */}
           <div className="pt-8 flex justify-center border-t border-subtle">
-            <Button asChild variant="outline" className="h-10 px-8 border-subtle">
-              <Link href="/dashboard">
-                Return to Dashboard
-              </Link>
+            <Button
+              asChild
+              variant="outline"
+              className="h-10 px-8 border-subtle"
+            >
+              <Link href="/dashboard">Return to Dashboard</Link>
             </Button>
           </div>
         </div>
@@ -140,12 +149,21 @@ export default async function SessionSummaryPage({
             © {new Date().getFullYear()} MOCKMIND
           </div>
           <div className="flex gap-8">
-            <Link href="#" className="font-mono text-[10px] text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest">Privacy</Link>
-            <Link href="#" className="font-mono text-[10px] text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest">Terms</Link>
+            <Link
+              href="#"
+              className="font-mono text-[10px] text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest"
+            >
+              Privacy
+            </Link>
+            <Link
+              href="#"
+              className="font-mono text-[10px] text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest"
+            >
+              Terms
+            </Link>
           </div>
         </div>
       </footer>
     </div>
   );
 }
-
